@@ -46,6 +46,12 @@ The workflow contains five specialized agents:
 
 5. **Confidence Scorer**  
    Generates a confidence score based on the available evidence, missing information, and quality-check findings.
+   
+### LangFlow Architecture
+
+The following workflow shows the complete multi-agent architecture implemented in LangFlow:
+
+![Multi-Agent LangFlow Architecture](Screenshots/Full%20LangFlow%20architecture.PNG)
 
 ### Workflow
 
@@ -91,6 +97,11 @@ The system was evaluated using:
 - Prompt optimization
 - Regression testing
 - A reusable 6-case Langfuse evaluation dataset
+ ### Langfuse Observability
+
+Langfuse was used to inspect individual Response Drafter observations, including the model input, generated response, latency, token usage, cost, and attached evaluation scores.
+
+![Langfuse Response Drafter Trace](Screenshots/Langfuse-Response-Drafter-Trace.PNG)
 
 ### Automated Evaluators
 
@@ -121,6 +132,11 @@ However, the provided information did not establish that an investigation had st
 | Role Adherence | 0.5 | 1.0 |
 
 This demonstrated the importance of using **human calibration alongside automated LLM evaluation**.
+### Human vs. LLM Judge Comparison
+
+Human evaluation identified subtle overreach that the automated LLM judge did not flag. In this baseline case, the human evaluator assigned 0.5 for Groundedness and Role Adherence, while the LLM-as-a-Judge assigned 1.0 for both.
+
+![Human vs LLM Judge Comparison](Screenshots/Human-vs-LLM%20Judge-Comparison.PNG)
 
 ---
 
@@ -162,7 +178,20 @@ The optimized prompt explicitly instructed the agent to:
 | LLM Role Adherence | 1.0 | 1.0 |
 
 The optimized responses handled uncertainty more explicitly while continuing to provide useful troubleshooting guidance.
+### Optimized Response Drafter Result
 
+After strengthening the Response Drafter role contract, the primary failure case was re-evaluated using the same evaluation criteria.
+
+The optimized response achieved:
+
+- **Human Groundedness: 1.0**
+- **Human Role Adherence: 1.0**
+- **LLM Groundedness: 1.0**
+- **LLM Role Adherence: 1.0**
+- **Quality Check: PASS**
+- **Confidence Score: 98 / High**
+
+![Optimized Response Drafter Results](Screenshots/Optimized-Response-Drafter-Results.PNG)
 ---
 
 ## Reusable Evaluation Dataset
